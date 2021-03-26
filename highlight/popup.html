@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="styles/popup.css" />
+	</head>
+	<body>
+		<div id="hl-popup">
+			<!-- search bar, color tool -->
+			<div id="tools" class="d-flex">
+				<!-- search bar -->
+				<div id="searchBar" class="flex-between-center">
+					<input
+						id="searchInput"
+						type="text"
+						autofocus
+						placeholder="Nhập từ khoá ..."
+						maxlength="1000"
+					/>
+					<span id="searchResult">0/0</span>
+				</div>
+
+				<!-- color tool -->
+				<div id="colorTool" class="flex-between-center">
+					<input
+						type="color"
+						title="Select color highlight"
+						id="colorPicker"
+						value="#ffff00"
+					/>
+					<div class="slide-tool">
+						<div class="d-flex jus-content-between">
+							<label for="transparent">Transparent</label>
+							<span id="transparentVal">0%</span>
+						</div>
+						<input
+							type="range"
+							name="transparent"
+							id="transparent"
+							value="0"
+							min="0"
+							max="100"
+							title="Select transparency"
+						/>
+					</div>
+
+					<div class="slide-tool">
+						<div class="d-flex jus-content-between">
+							<label for="size">Size</label>
+							<span id="sizeVal">14px</span>
+						</div>
+						<input
+							type="range"
+							name="size"
+							value="0"
+							id="size"
+							min="14"
+							max="48"
+							step="1"
+							title="Select font size"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- options config -->
+			<ul id="options" class="flex-around-center">
+				<li title="Insert text" class="active">
+					<img src="assets/text.png" />
+				</li>
+				<li title="Highlight text"><img src="assets/hl.png" /></li>
+				<li title="Bold text"><img src="assets/bold.png" /></li>
+				<li title="Undo"><img src="assets/undo.png" /></li>
+				<li title="Redo"><img src="assets/redo.png" /></li>
+				<li title="Clean all"><img src="assets/clean.png" /></li>
+			</ul>
+		</div>
+	</body>
+	<script src="scripts/lib/jquery.min.js"></script>
+	<script src="scripts/popup.js"></script>
+</html>

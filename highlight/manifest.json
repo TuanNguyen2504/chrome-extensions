@@ -1,0 +1,32 @@
+{
+	"name": "Hightlight",
+	"description": "Công cụ giúp highlight từ khoá trong website của bạn một cách dễ dàng",
+	"version": "1.1",
+	"manifest_version": 2,
+	"author": "Nguyễn Tuấn",
+
+	"icons": {
+		"128": "assets/icon.png"
+	},
+
+	"browser_action": {
+		"default_title": "Text Highlight",
+		"default_icon": "assets/icon.png",
+		"default_popup": "popup.html"
+	},
+
+	"permissions": ["storage", "tabs"],
+
+	"background": {
+		"scripts": ["scripts/background.js"],
+		"persistent": false
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"css": ["styles/style.css"],
+			"js": ["scripts/lib/jquery.min.js", "scripts/content.js"]
+		}
+	]
+}

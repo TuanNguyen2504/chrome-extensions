@@ -1,0 +1,153 @@
+.flex-between-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-around-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.jus-content-between {
+  justify-content: space-between;
+}
+
+.align-i-center {
+  align-items: center;
+}
+
+/* main */
+#hl-popup {
+  border-radius: 8px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 8px 16px;
+}
+
+#tools {
+  padding: 12px 6px;
+  border-bottom: solid 1px #d5d5d5;
+}
+
+/* search bar */
+#searchBar {
+  padding-right: 12px;
+  border-right: solid 1px #d5d5d5;
+}
+#searchBar input {
+  outline: none;
+  height: 28px;
+  border: solid 1px #d5d5d5;
+  box-shadow: 0px 3px 3px 1px rgba(25, 25, 25, 0.1);
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 2px 8px;
+  margin-right: 8px;
+}
+#searchBar input::-webkit-input-placeholder {
+  color: #d5d5d5;
+  font-size: 14px;
+}
+#searchBar input::-moz-placeholder {
+  color: #d5d5d5;
+  font-size: 14px;
+}
+#searchBar input:-ms-input-placeholder {
+  color: #d5d5d5;
+  font-size: 14px;
+}
+#searchBar input::-ms-input-placeholder {
+  color: #d5d5d5;
+  font-size: 14px;
+}
+#searchBar input::placeholder {
+  color: #d5d5d5;
+  font-size: 14px;
+}
+
+#searchResult {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* color tool */
+#colorTool {
+  padding-left: 12px;
+}
+
+.slide-tool {
+  padding: 0 12px;
+}
+.slide-tool label,
+.slide-tool span {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-style: italic;
+  color: #d0bd31;
+}
+.slide-tool input {
+  color: #909090 !important;
+  box-sizing: initial !important;
+  width: 135px !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  height: 7px !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 3px inset !important;
+  margin: 0px !important;
+  border-width: initial !important;
+  border-style: none !important;
+  border-color: initial !important;
+  -o-border-image: initial !important;
+  border-image: initial !important;
+  padding: 2px !important;
+  border-radius: 14px !important;
+  background: white !important;
+  outline: none !important;
+}
+.slide-tool input::-webkit-slider-thumb {
+  cursor: pointer;
+}
+
+#colorPicker {
+  height: 28px;
+  outline: none;
+  border: solid 1px #d5d5d5;
+  box-shadow: 0px 3px 3px 1px rgba(25, 25, 25, 0.1);
+  cursor: pointer;
+}
+
+/* options */
+#options {
+  padding: 8px 0;
+  margin: 0;
+}
+#options li {
+  list-style: none;
+  padding: 12px;
+  box-shadow: 0px 3px 3px 1px rgba(25, 25, 25, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#options li:hover, #options li:active, #options li.active {
+  background-color: #f1f1f1;
+}
+#options li.active img {
+  -webkit-filter: brightness(0.8);
+  filter: brightness(0.8);
+}
+#options img {
+  width: 24px;
+  height: 24px;
+}
+
+/*# sourceMappingURL=popup.css.map */

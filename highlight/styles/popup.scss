@@ -1,0 +1,175 @@
+$border-color: #d5d5d5;
+$main-color: #d0bd31;
+$boxShadow: 0px 3px 3px 1px rgba(25, 25, 25, 0.1);
+
+.flex-between-center {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.flex-around-center {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.jus {
+	&-content {
+		&-between {
+			justify-content: space-between;
+		}
+	}
+}
+
+.align-i-center {
+	align-items: center;
+}
+
+/* main */
+#hl-popup {
+	border-radius: 8px;
+	width: -webkit-max-content;
+	width: -moz-max-content;
+	width: max-content;
+
+	padding: 8px 16px;
+}
+
+#tools {
+	padding: 12px 6px;
+	border-bottom: solid 1px $border-color;
+}
+
+/* search bar */
+#searchBar {
+	input {
+		outline: none;
+		height: 28px;
+		border: solid 1px $border-color;
+		box-shadow: $boxShadow;
+		border-radius: 2px;
+
+		font-size: 16px;
+		padding: 2px 8px;
+		margin-right: 8px;
+
+		&::-webkit-input-placeholder {
+			color: $border-color;
+			font-size: 14px;
+		}
+
+		&::-moz-placeholder {
+			color: $border-color;
+			font-size: 14px;
+		}
+
+		&:-ms-input-placeholder {
+			color: $border-color;
+			font-size: 14px;
+		}
+
+		&::-ms-input-placeholder {
+			color: $border-color;
+			font-size: 14px;
+		}
+
+		&::placeholder {
+			color: $border-color;
+			font-size: 14px;
+		}
+	}
+	padding-right: 12px;
+	border-right: solid 1px $border-color;
+}
+
+#searchResult {
+	color: #aaa;
+	font-size: 14px;
+}
+
+/* color tool */
+#colorTool {
+	padding-left: 12px;
+}
+
+.slide-tool {
+	padding: 0 12px;
+
+	label,
+	span {
+		font-size: 14px;
+		font-family: sans-serif;
+		font-style: italic;
+		color: $main-color;
+	}
+
+	input {
+		color: rgb(144, 144, 144) !important;
+		box-sizing: initial !important;
+		width: 135px !important;
+		-webkit-appearance: none !important;
+		-moz-appearance: none !important;
+		appearance: none !important;
+		-webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+		height: 7px !important;
+		box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 3px inset !important;
+		margin: 0px !important;
+		border-width: initial !important;
+		border-style: none !important;
+		border-color: initial !important;
+		-o-border-image: initial !important;
+		border-image: initial !important;
+		padding: 2px !important;
+		border-radius: 14px !important;
+		background: rgb(255, 255, 255) !important;
+		outline: none !important;
+
+		&::-webkit-slider-thumb {
+			cursor: pointer;
+		}
+	}
+}
+
+#colorPicker {
+	height: 28px;
+	outline: none;
+	border: solid 1px $border-color;
+	box-shadow: $boxShadow;
+	cursor: pointer;
+}
+
+/* options */
+
+#options {
+	padding: 8px 0;
+	margin: 0;
+	li {
+		list-style: none;
+		padding: 12px;
+		box-shadow: $boxShadow;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.2s;
+
+		&:hover,
+		&:active,
+		&.active {
+			background-color: #f1f1f1;
+		}
+
+		&.active img {
+			-webkit-filter: brightness(0.8);
+			filter: brightness(0.8);
+		}
+	}
+
+	img {
+		width: 24px;
+		height: 24px;
+	}
+}
