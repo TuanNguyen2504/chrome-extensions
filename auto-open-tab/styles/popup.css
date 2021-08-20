@@ -1,0 +1,141 @@
+:root {
+  --primary-color: #ff8400;
+  --grey-color: #aaa;
+  --light-color: #d5d5d5;
+  --transition: all 0.35s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+body {
+  width: 360px;
+  padding: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--grey-color);
+  border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--light-color);
+}
+
+/* input */
+#linkInput {
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+  min-height: 36px;
+  max-height: 360px;
+
+  padding: 8px 12px;
+  outline: none;
+  border: solid 1px var(--grey-color);
+  background-color: #f5f5f5;
+  border-radius: 4px;
+
+  font-size: 15px;
+}
+
+.count-link {
+  text-align: right;
+  font-size: 14px;
+  color: var(--grey-color);
+  margin-bottom: 8px;
+}
+
+#countLink {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--primary-color);
+}
+
+/* button */
+.btn-group {
+  width: 100%;
+  text-align: right;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--grey-color);
+
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  -webkit-filter: brightness(0.95);
+  filter: brightness(0.95);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+}
+
+/* history section */
+.history-section {
+  margin-top: 16px;
+  max-height: 250px;
+  overflow: auto;
+  padding: 8px;
+}
+
+.history-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--primary-color);
+  padding: 4px 0px;
+}
+
+.history-item {
+  padding: 8px 0px;
+  font-size: 15px;
+  border-top: solid 1px var(--light-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.history-item:hover,
+.history-item:active {
+  background-color: var(--light-color);
+}
+
+.no-history {
+  color: #888;
+  font-size: 16px;
+}
+
+#clearHistory {
+  text-align: right;
+  margin: 8px 0;
+  color: #db3417;
+  font-size: 15px;
+
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#clearHistory:hover {
+  color: #d46c59;
+}

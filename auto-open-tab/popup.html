@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Open Tab</title>
+  <link rel="stylesheet" href="./styles/popup.css">
+</head>
+
+<body>
+
+  <!-- input -->
+  <textarea id="linkInput" placeholder="Nhập các URL"></textarea>
+  <div class="count-link">
+    Số link:&nbsp;<span id="countLink">0</span>
+  </div>
+
+  <!-- button group -->
+  <div class="btn-group">
+    <button id="saveBtn" class="btn">Lưu lại</button>
+    <button id="openBtn" class="btn btn-primary">Mở</button>
+  </div>
+
+  <!-- save section -->
+  <div class="history-section">
+    <h3 class="history-title">Lưu trữ</h3>
+    <ul class="history-list" id="historyList"></ul>
+    <div id="clearHistory">Xoá lưu trữ</div>
+  </div>
+
+  <!-- scripts -->
+  <script src="./scripts/popup.js"></script>
+</body>
+
+</html>

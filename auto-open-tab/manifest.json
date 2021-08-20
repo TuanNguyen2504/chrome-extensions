@@ -1,0 +1,24 @@
+{
+	"name": "Auto Open Tab",
+	"description": "Công cụ mở đường link tự động, nhanh chóng và hiệu quả",
+	"version": "1.0",
+	"manifest_version": 2,
+	"author": "Trí Vinh",
+
+	"icons": {
+		"128": "assets/icon.png"
+	},
+
+	"browser_action": {
+		"default_title": "Auto Open Tab",
+		"default_icon": "assets/icon.png",
+		"default_popup": "popup.html"
+	},
+
+	"permissions": ["storage", "tabs"],
+
+	"background": {
+		"scripts": ["scripts/background.js"],
+		"persistent": false
+	}
+}
