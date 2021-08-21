@@ -1,0 +1,113 @@
+:root {
+  --primary-color: #ff8400;
+  --grey-color: #aaa;
+  --light-color: #d5d5d5;
+  --transition: all 0.35s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+body {
+  width: 576px;
+  padding: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--grey-color);
+  border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--light-color);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* card info */
+.card-info {
+  margin: 8px 0;
+}
+
+.card-info-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.card-info-item:nth-child(2) {
+  margin: 8px 0px;
+}
+
+.card-info label {
+  min-width: 120px;
+  flex-basis: 120px;
+  font-size: 16px;
+  color: var(--grey-color);
+}
+
+.card-info input {
+  outline: none;
+  border: solid 1px var(--light-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  flex-grow: 1;
+}
+
+/* button */
+.btn-group {
+  width: 100%;
+  text-align: right;
+  margin-top: 16px;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--grey-color);
+
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  -webkit-filter: brightness(0.95);
+  filter: brightness(0.95);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+}
+
+.btn-offauto {
+  background-color: #e41931;
+}
+
+.btn-onauto {
+  background-color: #1fbb41;
+}

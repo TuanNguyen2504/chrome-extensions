@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Fill Credit Card</title>
+  <link rel="stylesheet" href="./styles/popup.css">
+</head>
+
+<body>
+
+  <!-- input -->
+  <div class="card-info">
+    <div class="card-info-item">
+      <label for="cardNumber">Mã thẻ:&nbsp;</label>
+      <input placeholder="XXXXXXXXXXXXXXXX" id="cardNumber" type="text" name="cardNumber" />
+    </div>
+
+    <div class="card-info-item">
+      <label for="cardExpireDate">Ngày hết hạn:&nbsp;</label>
+      <input placeholder="MM/YY" type="text" id="cardExpireDate" name="cardExpireDate">
+    </div>
+
+    <div class="card-info-item">
+      <label for="cvv">CVV:&nbsp;</label>
+      <input placeholder="XXX" type="text" id="cvv" name="cvv">
+    </div>
+
+  </div>
+
+
+  <!-- button group -->
+  <div class="btn-group">
+    <button id="saveCardBtn" class="btn">Lưu thẻ</button>
+    <button id="fastFillBtn" class="btn btn-onauto">Fast Fill</button>
+    <button id="fillBtn" class="btn btn-primary">Auto Fill</button>
+  </div>
+
+  <!-- scripts -->
+  <script src="./scripts/lib/jquery.min.js"></script>
+  <script src="./scripts/popup.js"></script>
+</body>
+
+</html>
