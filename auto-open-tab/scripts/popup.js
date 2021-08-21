@@ -2,6 +2,7 @@
 
 const HISTORY_LS_KEY = 'auto-tab-history';
 const CARD_INFO_LS_KEY = 'card-info';
+const AUTO_MODE_LS_KEY = 'auto-mode';
 let oldHistoryList = [];
 let TIMEOUT_ID = null;
 
@@ -81,6 +82,31 @@ function debounce(cbFn) {
 	}, 0);
 }
 
+function toggleAutoMode() {
+	const autoBtn = $('#toggleAutoBtn');
+
+	if (autoBtn.hasClass('btn-onauto')) {
+		autoBtn.removeClass('btn-onauto').addClass('btn-offauto');
+		autoBtn.text('Auto đã tắt');
+		chrome.storage.sync.set({ [AUTO_MODE_LS_KEY]: 'off' });
+	} else {
+		autoBtn.removeClass('btn-offauto').addClass('btn-onauto');
+		autoBtn.text('Auto');
+		chrome.storage.sync.set({ [AUTO_MODE_LS_KEY]: 'on' });
+	}
+}
+
+function getAutoMode() {
+	chrome.storage.sync.get([AUTO_MODE_LS_KEY], function (data) {
+		if (data[AUTO_MODE_LS_KEY] === 'off') {
+			$('#toggleAutoBtn')
+				.removeClass('btn-onauto')
+				.addClass('btn-offauto')
+				.text('Auto đã tắt');
+		}
+	});
+}
+
 // main flow
 $(document).ready(function () {
 	const openBtn = document.getElementById('openBtn');
@@ -94,6 +120,9 @@ $(document).ready(function () {
 		oldHistoryList = JSON.parse(data || null) || [];
 		renderHistoryList(oldHistoryList);
 	});
+
+	// get auto mode
+	getAutoMode();
 
 	// get credit card info
 	getCardInfo();
@@ -160,4 +189,7 @@ $(document).ready(function () {
 		oldHistoryList = [];
 		renderHistoryList([]);
 	});
+
+	// toggle auto mode
+	$('#toggleAutoBtn').click(toggleAutoMode);
 });

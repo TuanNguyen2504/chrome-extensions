@@ -123,6 +123,14 @@ body {
   background-color: var(--primary-color);
 }
 
+.btn-offauto {
+  background-color: #e41931;
+}
+
+.btn-onauto {
+  background-color: #1fbb41;
+}
+
 /* history section */
 .history-section {
   margin-top: 16px;
