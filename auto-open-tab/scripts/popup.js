@@ -1,4 +1,7 @@
+/// <reference path="D:\tips\typings\jquery\globals\jquery\index.d.ts" />
+
 const HISTORY_LS_KEY = 'auto-tab-history';
+const CARD_INFO_LS_KEY = 'card-info';
 let oldHistoryList = [];
 let TIMEOUT_ID = null;
 
@@ -31,31 +34,43 @@ function getHistoryList() {
 	});
 }
 
+function getCardInfo() {
+	chrome.storage.sync.get([CARD_INFO_LS_KEY], function (data) {
+		const cardInfo = JSON.parse(data[CARD_INFO_LS_KEY] || null) || null;
+		console.log(cardInfo);
+		if (cardInfo) {
+			const { cardNumber, expireDate, cvv } = cardInfo;
+			$('#cardNumber').val(cardNumber);
+			$('#cardExpireDate').val(expireDate);
+			$('#cvv').val(cvv);
+		}
+	});
+}
+
 async function renderHistoryList(history = []) {
-	const historyListXML = document.getElementById('historyList');
+	const historyListXML = $('#historyList');
 
 	if (history.length === 0) {
-		historyListXML.innerHTML =
-			'<span class="no-history">Chưa có lưu trữ nào. Bấm "Lưu lại" để tạo lưu trữ mới !</span>';
+		historyListXML.html(
+			'<span class="no-history">Chưa có lưu trữ nào. Bấm "Lưu lại" để tạo lưu trữ mới !</span>',
+		);
 	} else {
 		let xml = '';
 		history.forEach((item) => {
 			xml += `<li data-id="${item.id}" class="history-item">${item.createdDate}</li>`;
 		});
-		historyListXML.innerHTML = xml;
+		historyListXML.html(xml);
 
 		// when history item click
-		document
-			.querySelector('.history-item')
-			.addEventListener('click', function () {
-				const id = this.getAttribute('data-id');
-				const urlList = oldHistoryList.find((i) => i.id == id)?.urlList || [];
-				let content = '';
-				urlList.forEach((url) => (content += url + '\n'));
-				document.getElementById('linkInput').value = content;
-				document.getElementById('countLink').innerText =
-					urlList.length.toString();
-			});
+		$('.history-item').on('click', function () {
+			const id = this.getAttribute('data-id');
+			const urlList = oldHistoryList.find((i) => i.id == id)?.urlList || [];
+
+			let content = '';
+			urlList.forEach((url) => (content += url + '\n'));
+			$('#linkInput').val(content);
+			$('#countLink').text(urlList.length.toString());
+		});
 	}
 }
 
@@ -67,9 +82,10 @@ function debounce(cbFn) {
 }
 
 // main flow
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
 	const openBtn = document.getElementById('openBtn');
 	const saveBtn = document.getElementById('saveBtn');
+	const saveCardBtn = document.getElementById('saveCardBtn');
 	const clearHistoryBtn = document.getElementById('clearHistory');
 	const linkInput = document.getElementById('linkInput');
 
@@ -78,6 +94,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		oldHistoryList = JSON.parse(data || null) || [];
 		renderHistoryList(oldHistoryList);
 	});
+
+	// get credit card info
+	getCardInfo();
 
 	// count link when textarea change
 	linkInput.addEventListener('change', function () {
@@ -105,6 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	// when click save button
 	saveBtn.addEventListener('click', async function () {
 		const urls = linkInput.value || '';
+		if (urls.length === 0) return;
+
 		const urlList = splitUrls(urls);
 		const newItem = {
 			id: oldHistoryList.length + 1,
@@ -113,9 +134,23 @@ document.addEventListener('DOMContentLoaded', function () {
 		};
 		const newHistoryList = [newItem, ...oldHistoryList];
 
+		oldHistoryList = [...newHistoryList];
 		renderHistoryList(newHistoryList);
 		chrome.storage.sync.set({
 			[HISTORY_LS_KEY]: JSON.stringify(newHistoryList),
+		});
+	});
+
+	// when click save credit card
+	saveCardBtn.addEventListener('click', function () {
+		const cardNumber = $('#cardNumber').val();
+		const expireDate = $('#cardExpireDate').val();
+		const cvv = $('#cvv').val();
+
+		const newCard = { cardNumber, expireDate, cvv };
+		saveCardBtn.textContent = 'Đã lưu thẻ';
+		chrome.storage.sync.set({
+			[CARD_INFO_LS_KEY]: JSON.stringify(newCard),
 		});
 	});
 

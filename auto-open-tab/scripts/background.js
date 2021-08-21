@@ -1,4 +1,4 @@
-const DELAY_TIME = 500;
+const DELAY_TIME = 3000;
 
 function sleep(time = DELAY_TIME) {
 	return new Promise((resolve) => {

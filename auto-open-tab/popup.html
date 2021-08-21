@@ -17,9 +17,28 @@
     Số link:&nbsp;<span id="countLink">0</span>
   </div>
 
+  <div class="card-info">
+    <div class="card-info-item">
+      <label for="cardNumber">Mã thẻ:&nbsp;</label>
+      <input placeholder="XXXX XXXX XXXX XXXX" id="cardNumber" type="text" name="cardNumber" />
+    </div>
+
+    <div class="card-info-item">
+      <label for="cardExpireDate">Ngày hết hạn:&nbsp;</label>
+      <input placeholder="MM/YY" type="text" id="cardExpireDate" name="cardExpireDate">
+    </div>
+
+    <div class="card-info-item">
+      <label for="cvv">CVV:&nbsp;</label>
+      <input placeholder="XXX" type="text" id="cvv" name="cvv">
+    </div>
+
+  </div>
+
   <!-- button group -->
   <div class="btn-group">
-    <button id="saveBtn" class="btn">Lưu lại</button>
+    <button id="saveCardBtn" class="btn">Lưu thẻ</button>
+    <button id="saveBtn" class="btn">Lưu trữ</button>
     <button id="openBtn" class="btn btn-primary">Mở</button>
   </div>
 
@@ -31,6 +50,7 @@
   </div>
 
   <!-- scripts -->
+  <script src="./scripts/lib/jquery.min.js"></script>
   <script src="./scripts/popup.js"></script>
 </body>
 
