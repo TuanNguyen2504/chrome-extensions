@@ -1,5 +1,3 @@
-/// <reference path="D:\tips\typings\jquery\globals\jquery\index.d.ts" />
-
 const BUY_IT_ID = 'binBtn_btn';
 const PAYMENT_OPTION_SELECTOR = 'input[title="Add new card"]';
 const AUTO_MODE_LS_KEY = 'auto-mode';
@@ -41,7 +39,7 @@ function autoClickBinBtn() {
 function autoClickPaymentMethod() {
 	setTimeout(() => {
 		document.querySelector(PAYMENT_OPTION_SELECTOR)?.click();
-	}, 1000);
+	}, 2000);
 }
 
 async function autoFillCardNumber() {
@@ -101,7 +99,6 @@ function getCardInfo() {
 function isAuto() {
 	return new Promise((resolve, reject) => {
 		chrome.storage.sync.get([AUTO_MODE_LS_KEY], function (data) {
-			console.log(data[AUTO_MODE_LS_KEY]);
 			if (data[AUTO_MODE_LS_KEY] === 'off') {
 				resolve(false);
 			} else {

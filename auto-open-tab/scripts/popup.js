@@ -1,5 +1,3 @@
-/// <reference path="D:\tips\typings\jquery\globals\jquery\index.d.ts" />
-
 const HISTORY_LS_KEY = 'auto-tab-history';
 const CARD_INFO_LS_KEY = 'card-info';
 const AUTO_MODE_LS_KEY = 'auto-mode';
