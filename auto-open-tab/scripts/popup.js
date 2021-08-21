@@ -3,6 +3,14 @@
 const HISTORY_LS_KEY = 'auto-tab-history';
 const CARD_INFO_LS_KEY = 'card-info';
 const AUTO_MODE_LS_KEY = 'auto-mode';
+const AUTO_DONE_LS_KEY = 'auto-done';
+const TIME_LS_KEY = 'time';
+const DEFAULT_TIME = {
+	OPEN_TAB: 3000,
+	CLICK_BUY: 3000,
+	FILL_PAYMENT: 250,
+};
+
 let oldHistoryList = [];
 let TIMEOUT_ID = null;
 
@@ -38,7 +46,6 @@ function getHistoryList() {
 function getCardInfo() {
 	chrome.storage.sync.get([CARD_INFO_LS_KEY], function (data) {
 		const cardInfo = JSON.parse(data[CARD_INFO_LS_KEY] || null) || null;
-		console.log(cardInfo);
 		if (cardInfo) {
 			const { cardNumber, expireDate, cvv } = cardInfo;
 			$('#cardNumber').val(cardNumber);
@@ -87,12 +94,26 @@ function toggleAutoMode() {
 
 	if (autoBtn.hasClass('btn-onauto')) {
 		autoBtn.removeClass('btn-onauto').addClass('btn-offauto');
-		autoBtn.text('Auto đã tắt');
+		autoBtn.text('Auto Mode: Off');
 		chrome.storage.sync.set({ [AUTO_MODE_LS_KEY]: 'off' });
 	} else {
 		autoBtn.removeClass('btn-offauto').addClass('btn-onauto');
-		autoBtn.text('Auto');
+		autoBtn.text('Auto Mode: On');
 		chrome.storage.sync.set({ [AUTO_MODE_LS_KEY]: 'on' });
+	}
+}
+
+function toggleAutoDone() {
+	const autoBtn = $('#autoDoneBtn');
+
+	if (autoBtn.hasClass('btn-onauto')) {
+		autoBtn.removeClass('btn-onauto').addClass('btn-offauto');
+		autoBtn.text('Auto Done: Off');
+		chrome.storage.sync.set({ [AUTO_DONE_LS_KEY]: 'off' });
+	} else {
+		autoBtn.removeClass('btn-offauto').addClass('btn-onauto');
+		autoBtn.text('Auto Done: On');
+		chrome.storage.sync.set({ [AUTO_DONE_LS_KEY]: 'on' });
 	}
 }
 
@@ -102,9 +123,79 @@ function getAutoMode() {
 			$('#toggleAutoBtn')
 				.removeClass('btn-onauto')
 				.addClass('btn-offauto')
-				.text('Auto đã tắt');
+				.text('Auto Mode: Off');
 		}
 	});
+	chrome.storage.sync.get([AUTO_DONE_LS_KEY], function (data) {
+		if (data[AUTO_DONE_LS_KEY] === 'on') {
+			$('#autoDoneBtn')
+				.removeClass('btn-offauto')
+				.addClass('btn-onauto')
+				.text('Auto Done: On');
+		}
+	});
+}
+
+function getAndSetTimeDefault() {
+	chrome.storage.sync.get([TIME_LS_KEY], function (data) {
+		if (!data[TIME_LS_KEY]) {
+			const defTime = {
+				openTab: DEFAULT_TIME.OPEN_TAB,
+				clickBuy: DEFAULT_TIME.CLICK_BUY,
+				fillPayment: DEFAULT_TIME.FILL_PAYMENT,
+			};
+			$('#timeOpenTab').val(DEFAULT_TIME.OPEN_TAB / 1000);
+			$('#timeClickBuy').val(DEFAULT_TIME.CLICK_BUY / 1000);
+			$('#timeFillPayment').val(DEFAULT_TIME.FILL_PAYMENT / 1000);
+			chrome.storage.sync.set({ [TIME_LS_KEY]: JSON.stringify(defTime) });
+		} else {
+			const { openTab, clickBuy, fillPayment } = JSON.parse(data[TIME_LS_KEY]);
+			$('#timeOpenTab').val(openTab / 1000);
+			$('#timeClickBuy').val(clickBuy / 1000);
+			$('#timeFillPayment').val(fillPayment / 1000);
+		}
+	});
+}
+
+function resetAll() {
+	chrome.storage.sync.clear();
+	$('#linkInput').val('');
+	$('#cardNumber').val('');
+	$('#cardExpireDate').val('');
+	$('#cvv').val('');
+	getAndSetTimeDefault();
+	oldHistoryList = [];
+	renderHistoryList([]);
+}
+
+function timeOpenTabChange(e) {
+	const val = e.target.value * 1000;
+	const newTime = {
+		openTab: val,
+		clickBuy: $('#timeClickBuy').val() * 1000,
+		fillPayment: $('#timeFillPayment').val() * 1000,
+	};
+	chrome.storage.sync.set({ [TIME_LS_KEY]: JSON.stringify(newTime) });
+}
+
+function timeClickBuyChange(e) {
+	const val = e.target.value * 1000;
+	const newTime = {
+		openTab: $('#timeOpenTab').val() * 1000,
+		clickBuy: val,
+		fillPayment: $('#timeFillPayment').val() * 1000,
+	};
+	chrome.storage.sync.set({ [TIME_LS_KEY]: JSON.stringify(newTime) });
+}
+
+function timeFillPaymentChange(e) {
+	const val = e.target.value * 1000;
+	const newTime = {
+		openTab: $('#timeOpenTab').val() * 1000,
+		clickBuy: $('#timeClickBuy').val() * 1000,
+		fillPayment: val,
+	};
+	chrome.storage.sync.set({ [TIME_LS_KEY]: JSON.stringify(newTime) });
 }
 
 // main flow
@@ -126,6 +217,9 @@ $(document).ready(function () {
 
 	// get credit card info
 	getCardInfo();
+
+	// set default time
+	getAndSetTimeDefault();
 
 	// count link when textarea change
 	linkInput.addEventListener('change', function () {
@@ -183,13 +277,24 @@ $(document).ready(function () {
 		});
 	});
 
+	// toggle auto mode
+	$('#toggleAutoBtn').click(toggleAutoMode);
+
+	// toggle auto done
+	$('#autoDoneBtn').click(toggleAutoDone);
+
 	// clear history click
 	clearHistoryBtn.addEventListener('click', function () {
-		chrome.storage.sync.clear();
+		chrome.storage.sync.set({ [HISTORY_LS_KEY]: null });
 		oldHistoryList = [];
 		renderHistoryList([]);
 	});
 
-	// toggle auto mode
-	$('#toggleAutoBtn').click(toggleAutoMode);
+	// reset all cache
+	$('#resetAll').click(resetAll);
+
+	// time change
+	$('#timeOpenTab').change(timeOpenTabChange);
+	$('#timeClickBuy').change(timeClickBuyChange);
+	$('#timeFillPayment').change(timeFillPaymentChange);
 });

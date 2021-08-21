@@ -3,13 +3,16 @@
 const BUY_IT_ID = 'binBtn_btn';
 const PAYMENT_OPTION_SELECTOR = 'input[title="Add new card"]';
 const AUTO_MODE_LS_KEY = 'auto-mode';
+const AUTO_DONE_LS_KEY = 'auto-done';
+const TIME_LS_KEY = 'time';
 
 let CARD_NUMBER = '1111111111111111';
 let EXPIRE_DATE = '01/01';
 let CVV_CODE = '111';
 const CARD_INFO_LS_KEY = 'card-info';
 
-const DELAY_AUTO_FILL_TIME = 200;
+let DELAY_AUTO_FILL_TIME = 250;
+let DELAY_CLICK_BUY_TIME = 3000;
 
 function sleep(time = DELAY_AUTO_FILL_TIME) {
 	return new Promise((resolve) => {
@@ -19,11 +22,20 @@ function sleep(time = DELAY_AUTO_FILL_TIME) {
 	});
 }
 
+function getTimeDelay() {
+	chrome.storage.sync.get([TIME_LS_KEY], function (data) {
+		if (data[TIME_LS_KEY]) {
+			const { clickBuy, fillPayment } = JSON.parse(data[TIME_LS_KEY]);
+			DELAY_AUTO_FILL_TIME = fillPayment;
+			DELAY_CLICK_BUY_TIME = clickBuy;
+		}
+	});
+}
+
 function autoClickBinBtn() {
-	console.log('click');
 	setTimeout(() => {
 		document.getElementById(BUY_IT_ID)?.click();
-	}, 1000);
+	}, DELAY_CLICK_BUY_TIME);
 }
 
 function autoClickPaymentMethod() {
@@ -102,6 +114,7 @@ function isAuto() {
 // main flow
 $(document).ready(async function () {
 	const { hostname } = window.location;
+	getTimeDelay();
 
 	// buy now page
 	if (hostname.indexOf('www.ebay.com') !== -1 && (await isAuto())) {
@@ -122,7 +135,11 @@ $(document).ready(async function () {
 			await autoFillCardExpiryDate();
 			await autoFillCvvCode();
 
-			// document.querySelector('.form-action.ADD_CARD button').click();
-		}, 4000);
+			chrome.storage.sync.get([AUTO_DONE_LS_KEY], function (data) {
+				if (data[AUTO_DONE_LS_KEY] === 'on') {
+					document.querySelector('.form-action.ADD_CARD button').click();
+				}
+			});
+		}, 5000);
 	}
 });

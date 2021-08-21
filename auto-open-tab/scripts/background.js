@@ -1,6 +1,20 @@
-const DELAY_TIME = 3000;
+let DEF_DELAY_TIME = 4000;
+const TIME_LS_KEY = 'time';
 
-function sleep(time = DELAY_TIME) {
+function getTimeDelay() {
+	return new Promise((resolve) => {
+		chrome.storage.sync.get([TIME_LS_KEY], function (data) {
+			if (data[TIME_LS_KEY]) {
+				const { openTab } = JSON.parse(data[TIME_LS_KEY]);
+				resolve(openTab);
+			} else {
+				resolve(DEF_DELAY_TIME);
+			}
+		});
+	});
+}
+
+function sleep(time = DEF_DELAY_TIME) {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve(true);
@@ -13,7 +27,7 @@ async function openUrlsNewTab(urlList = []) {
 		const l = urlList.length;
 		for (let i = 0; i < l; ++i) {
 			window.open(urlList[i], '_blank');
-			await sleep(DELAY_TIME);
+			await sleep(await getTimeDelay());
 		}
 	}
 }

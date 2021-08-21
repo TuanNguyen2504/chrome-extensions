@@ -16,7 +16,7 @@
 }
 
 body {
-  width: 480px;
+  width: 576px;
   padding: 12px;
 }
 
@@ -31,6 +31,15 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--light-color);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }
 
 /* input */
@@ -93,10 +102,34 @@ body {
   flex-grow: 1;
 }
 
+/* time setting */
+.time-setting {
+  margin-top: 16px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.time-setting label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--grey-color);
+}
+
+.time-setting input {
+  border: solid 1px var(--light-color);
+  padding: 6px 14px;
+  font-size: 15px;
+  outline: none;
+  border-radius: 4px;
+}
+
 /* button */
 .btn-group {
   width: 100%;
   text-align: right;
+  margin-top: 16px;
 }
 
 .btn {
@@ -164,16 +197,22 @@ body {
   font-size: 16px;
 }
 
-#clearHistory {
-  text-align: right;
+.reset {
   margin: 8px 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.reset-item {
   color: #db3417;
   font-size: 15px;
 
   cursor: pointer;
   transition: var(--transition);
+  margin-left: 16px;
+  text-decoration: underline;
 }
 
-#clearHistory:hover {
+.reset-item:hover {
   color: #d46c59;
 }

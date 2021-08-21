@@ -35,19 +35,39 @@
 
   </div>
 
+  <!-- time setting -->
+  <div class="time-setting">
+    <div class="flex-col">
+      <label for="timeOpenTab">Thời gian mở tab (s)</label>
+      <input id="timeOpenTab" name="timeOpenTab" type="number" min="0" max="30" />
+    </div>
+    <div class="flex-col">
+      <label for="timeClickBuy">Thời gian click buy (s)</label>
+      <input id="timeClickBuy" name="timeClickBuy" type="number" min="0" max="30" />
+    </div>
+    <div class="flex-col">
+      <label for="timeFillPayment">Thời gian fill payment (s/kt)</label>
+      <input id="timeFillPayment" name="timeFillPayment" type="number" min="0" max="30" />
+    </div>
+  </div>
+
   <!-- button group -->
   <div class="btn-group">
-    <button id="toggleAutoBtn" class="btn btn-onauto">Auto</button>
     <button id="saveCardBtn" class="btn">Lưu thẻ</button>
     <button id="saveBtn" class="btn">Lưu trữ</button>
-    <button id="openBtn" class="btn btn-primary">Mở</button>
+    <button id="autoDoneBtn" class="btn btn-offauto">Auto Done: Off</button>
+    <button id="toggleAutoBtn" class="btn btn-onauto">Auto Mode: On</button>
+    <button id="openBtn" class="btn btn-primary">Mở Tab</button>
   </div>
 
   <!-- save section -->
   <div class="history-section">
     <h3 class="history-title">Lưu trữ</h3>
     <ul class="history-list" id="historyList"></ul>
-    <div id="clearHistory">Xoá lưu trữ</div>
+    <div class="d-flex reset">
+      <div class="reset-item" id="resetAll">Reset tất cả</div>
+      <div class="reset-item" id="clearHistory">Xoá lưu trữ</div>
+    </div>
   </div>
 
   <!-- scripts -->
