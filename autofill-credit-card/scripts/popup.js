@@ -11,6 +11,7 @@ function getCardInfo() {
 		}
 	});
 }
+
 // main flow
 $(document).ready(function () {
 	const saveCardBtn = document.getElementById('saveCardBtn');
